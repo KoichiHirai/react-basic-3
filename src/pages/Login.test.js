@@ -7,7 +7,10 @@ test('renders learn react link', () => {
   expect(screen.getByLabelText(/ユーザーID/i)).toBeInTheDocument();
 
   expect(screen.getByLabelText(/パスワード/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/パスワード/i)).toHaveAttribute('type', 'password');
+  expect(screen.getByLabelText(/パスワード/i)).toHaveAttribute(
+    'type',
+    'password'
+  );
 
   expect(screen.getByRole('button', { name: /ログイン/i })).toBeInTheDocument();
 });
