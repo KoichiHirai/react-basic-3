@@ -42,7 +42,7 @@ function Login() {
       );
       setToken(responseLogin.data.token);
       //次の画面に遷移する
-      navigate('/');
+      navigate('/', { state: { token: responseLogin.data.token } });
     } catch (error) {
       console.log(error);
       setErrorMessage(
