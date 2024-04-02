@@ -4,13 +4,13 @@ import Login from './Login';
 test('renders learn react link', () => {
   render(<Login />);
 
-  expect(screen.getByLabelText(/メールアドレス/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/メールアドレス/)).toBeInTheDocument();
 
-  expect(screen.getByLabelText(/パスワード/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/パスワード/i)).toHaveAttribute(
+  expect(screen.getByLabelText(/パスワード/)).toBeInTheDocument();
+  expect(screen.getByLabelText(/パスワード/)).toHaveAttribute(
     'type',
     'password'
   );
 
-  expect(screen.getByRole('button', { name: /ログイン/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /ログイン/ })).toBeInTheDocument();
 });
