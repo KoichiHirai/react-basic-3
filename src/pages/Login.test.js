@@ -1,8 +1,13 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 
 test('renders learn react link', () => {
-  render(<Login />);
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  );
 
   expect(screen.getByLabelText(/メールアドレス/)).toBeInTheDocument();
 
