@@ -43,14 +43,12 @@ function ReviewList() {
   return (
     <div className="review-list">
       <h2 className="title">書籍レビュー一覧</h2>
-      <div className="error-message error-message--alert">{errorMessage}</div>
+      <div className="error-message --alert">{errorMessage}</div>
       {reviewList.map((review) => {
         return (
           <div key={review.id} className="review">
-            <div className="review__title review__title--large">
-              {review.title}
-            </div>
-            <div className="review__url review__url--small">
+            <div className="review__title --large">{review.title}</div>
+            <div className="review__url --small">
               URL:{' '}
               <a href={review.url} target="_blank" rel="noopener noreferrer">
                 {review.url}

@@ -6,7 +6,7 @@
 }
 
 .error-message {
-  &--alert {
+  &.--alert {
     color: red;
   }
 }
@@ -19,14 +19,14 @@
 
   &__title {
     font-weight: bold;
-    &--large {
+    &.--large {
       font-size: 24px;
     }
   }
 
   &__url {
     margin-top: 8px;
-    &--small {
+    &.--small {
       font-size: 12px;
     }
   }
