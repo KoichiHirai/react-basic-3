@@ -20,10 +20,6 @@ function ReviewList() {
   const token = location.state.token;
   // console.log(location.state.token);
 
-  const handlePageChange = (newPage) => {
-    dispatch(setCurrentPage(newPage));
-  };
-
   const getData = async (offset) => {
     try {
       // axiosでレビュー一覧をGETする
