@@ -2,6 +2,7 @@ import './SignUp.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import Compressor from 'compressorjs';
 
@@ -16,6 +17,7 @@ function SignUp() {
   const [token, setToken] = useState('');
   const [iconUrl, setIconUrl] = useState('');
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
   const isValid = !name || !email || emailError || !pwd || pwdError || !image;
 
   const handleNameChange = (e) => setName(e.target.value);
@@ -69,7 +71,11 @@ function SignUp() {
             'https://railway.bookreview.techtrain.dev/users',
             signupData
           );
-          setToken(responseUserCreate.data.token);
+          // setToken(responseUserCreate.data.token);
+          setCookie('authToken', responseUserCreate.data.token, {
+            path: '/',
+            sameSite: 'strict',
+          });
           // axiosでPOSTしてプロフィール画像を登録する
           const responseIconUpload = await axios.post(
             'https://railway.bookreview.techtrain.dev/uploads',
@@ -81,7 +87,7 @@ function SignUp() {
             }
           );
           setIconUrl(responseIconUpload.data.iconUrl);
-          navigate('/login');
+          navigate('/');
         } catch (error) {
           console.log(error);
           setErrorMessage(
