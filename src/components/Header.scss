@@ -1,0 +1,33 @@
+.header {
+  background-color: blue;
+  color: white;
+  display: flex;
+  padding: 16px 32px;
+  justify-content: space-between;
+  align-items: center;
+  &__name {
+    font-weight: bold;
+    margin-right: auto;
+    text-decoration: none;
+    &.--large {
+      font-size: 24px;
+    }
+    &:visited {
+      color: white;
+    }
+  }
+  &__username {
+  }
+
+  &__login,
+  &__logout {
+    margin-left: 32px;
+    text-decoration: none;
+    &:hover {
+      color: aqua;
+    }
+    &:visited {
+      color: white;
+    }
+  }
+}

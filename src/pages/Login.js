@@ -1,7 +1,8 @@
 import './Login.scss';
+// import Header from '../components/Header';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 function Login() {
@@ -12,6 +13,7 @@ function Login() {
   const [token, setToken] = useState('');
   const [iconUrl, setIconUrl] = useState('');
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['authToken']);
   const isValid = !email || emailError || !pwd;
 
   const handleEmailChange = (e) => {
@@ -40,9 +42,14 @@ function Login() {
         'https://railway.bookreview.techtrain.dev/signin',
         loginData
       );
-      setToken(responseLogin.data.token);
+      // setToken(responseLogin.data.token);
+      setCookie('authToken', responseLogin.data.token, {
+        path: '/',
+        sameSite: 'strict',
+      });
       //次の画面に遷移する
-      navigate('/', { state: { token: responseLogin.data.token } });
+      // navigate('/', { state: { token: responseLogin.data.token } });
+      navigate('/');
     } catch (error) {
       console.log(error);
       setErrorMessage(
@@ -52,28 +59,31 @@ function Login() {
   };
 
   return (
-    <div className="login">
-      <form className="form">
-        <h2>ログイン画面</h2>
-        <p className="error-message">{errorMessage}</p>
-        <label htmlFor="email">メールアドレス</label>
-        <input id="email" type="email" onChange={handleEmailChange} />
-        <p className="error-message">{emailError}</p>
-        <label htmlFor="password">パスワード</label>
-        <input id="password" type="password" onChange={handlePwdChange} />
-        <button
-          type="button"
-          className="btn-login"
-          onClick={handleSubmit}
-          disabled={isValid}
-        >
-          ログイン
-        </button>
-        <Link className="link-new-account" to="/signup">
-          新規アカウントを作成する
-        </Link>
-      </form>
-    </div>
+    <>
+      {/* <Header /> */}
+      <div className="login">
+        <form className="form">
+          <h2>ログイン画面</h2>
+          <p className="error-message">{errorMessage}</p>
+          <label htmlFor="email">メールアドレス</label>
+          <input id="email" type="email" onChange={handleEmailChange} />
+          <p className="error-message">{emailError}</p>
+          <label htmlFor="password">パスワード</label>
+          <input id="password" type="password" onChange={handlePwdChange} />
+          <button
+            type="button"
+            className="btn-login"
+            onClick={handleSubmit}
+            disabled={isValid}
+          >
+            ログイン
+          </button>
+          <Link className="link-new-account" to="/signup">
+            新規アカウントを作成する
+          </Link>
+        </form>
+      </div>
+    </>
   );
 }
 
