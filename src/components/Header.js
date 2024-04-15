@@ -54,7 +54,10 @@ function Header() {
         </Link>
       ) : (
         <>
-          <div className="header__usename">{user ? user.name : ''}</div>
+          {/* <div className="header__usename">{user ? user.name : ''}</div> */}
+          <Link className="header__username" to="/profile">
+            {user ? user.name : ''}
+          </Link>
           <Link className="header__logout" onClick={handleLogout}>
             ログアウト
           </Link>

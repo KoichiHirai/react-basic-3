@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ReviewList from '../pages/ReviewList';
+import Profile from '../pages/Profile';
 
 function Router() {
   const [cookies, setToken] = useCookies(['authToken']);
@@ -26,11 +27,13 @@ function Router() {
           <>
             <Route path="/login" element={<Navigate to="/" />} />
             <Route path="/signup" element={<Navigate to="/" />} />
+            <Route path="/profile" element={<Profile />} />
           </>
         ) : (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Login />} />
           </>
         )}
         {/* <Route path="/login" element={<Login />} />
