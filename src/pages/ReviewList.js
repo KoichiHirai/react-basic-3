@@ -3,7 +3,7 @@ import Pagination from '../components/Pagination';
 import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setCurrentPage, setData } from '../actions/action';
@@ -18,7 +18,7 @@ function ReviewList() {
   const [cookies] = useCookies(['authToken']);
   const itemsPerPage = 10;
   const dispatch = useDispatch();
-  const location = useLocation();
+  const navigate = useNavigate();
   // setToken(location.state.token);
   // const token = location.state.token;
   // console.log(location.state.token);
@@ -74,7 +74,15 @@ function ReviewList() {
     <>
       <Header />
       <div className="review-list">
-        <h2 className="title">書籍レビュー一覧</h2>
+        <div className="page-title">
+          <h2 className="page-title__title">書籍レビュー一覧</h2>
+          <button
+            className="page-title__create-button"
+            onClick={() => navigate('/new')}
+          >
+            レビュー登録
+          </button>
+        </div>
         <div className="error-message --alert">{errorMessage}</div>
         {data.map((review) => {
           return (

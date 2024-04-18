@@ -26,7 +26,7 @@ function Profile() {
           },
         }
       );
-      console.log(responseUserData.data.name);
+      // console.log(responseUserData.data.name);
       setUserName(responseUserData.data.name);
     } catch (err) {
       console.log(err);

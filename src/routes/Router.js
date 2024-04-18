@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ReviewList from '../pages/ReviewList';
 import Profile from '../pages/Profile';
+import New from '../pages/New';
 
 function Router() {
   const [cookies, setToken] = useCookies(['authToken']);
@@ -28,12 +29,14 @@ function Router() {
             <Route path="/login" element={<Navigate to="/" />} />
             <Route path="/signup" element={<Navigate to="/" />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/new" element={<New />} />
           </>
         ) : (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Login />} />
+            <Route path="/new" element={<Login />} />
           </>
         )}
         {/* <Route path="/login" element={<Login />} />
