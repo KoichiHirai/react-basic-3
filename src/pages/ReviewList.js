@@ -11,7 +11,7 @@ import { setCurrentPage, setData } from '../actions/action';
 function ReviewList() {
   // const [token, setToken] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [reviewList, setReviewList] = useState([]);
+  // const [reviewList, setReviewList] = useState([]);
   const { currentPage, data } = useSelector((state) => state.pagination);
   // const currentPage = useSelector((state) => state.pagination);
   // const data = useSelector((state) => state.data);
@@ -31,9 +31,6 @@ function ReviewList() {
         responseReview = await axios.get(
           'https://railway.bookreview.techtrain.dev/public/books',
           {
-            // headers: {
-            //   Authorization: `Bearer ${cookies.authToken}`,
-            // },
             params: {
               offset: offset,
             },
@@ -61,10 +58,35 @@ function ReviewList() {
     }
   };
 
-  //一時的にログアウトボタンを実装
-  // const handleLogout = () => {
-  //   removeCookie('authToken');
-  // };
+  const handleClickDetail = async (data) => {
+    if (data.isMine === true) {
+      navigate(`edit/${data.id}`);
+    } else {
+      const logData = {
+        selectBookId: data.id,
+      };
+
+      try {
+        const responseLogData = await axios.post(
+          'https://railway.bookreview.techtrain.dev/logs',
+          logData,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.authToken}`,
+            },
+          }
+        );
+        console.log('ログ送信');
+        console.log(responseLogData);
+        navigate(`detail/${data.id}`);
+      } catch (error) {
+        console.log(error);
+        setErrorMessage(
+          `ログ送信に失敗しました。 ${error.response.status === 401 ? error.response.data : error.response.data.ErrorMessageJP}`
+        );
+      }
+    }
+  };
 
   useEffect(() => {
     getData(currentPage * itemsPerPage);
@@ -85,8 +107,13 @@ function ReviewList() {
         </div>
         <div className="error-message --alert">{errorMessage}</div>
         {data.map((review) => {
+          console.log(review);
           return (
-            <div key={review.id} className="review">
+            <div
+              key={review.id}
+              className="review"
+              onClick={() => handleClickDetail(review)}
+            >
               <div className="review__title --large">{review.title}</div>
               <div className="review__url --small">
                 URL:{' '}

@@ -1,4 +1,4 @@
-.create {
+.detail {
   display: flex;
   flex-flow: column;
   font-size: 16px;
@@ -11,31 +11,31 @@
     margin: 0;
   }
 
+  &__loading {
+    font-size: 20px;
+    &.--bold {
+      font-weight: bold;
+    }
+  }
+
   &__label {
     font-size: 20px;
     margin-top: 16px;
+    font-weight: bold;
   }
 
-  #title,
-  #url,
-  #detail,
-  #review {
+  &__book-title,
+  &__url,
+  &__detail,
+  &__review,
+  &__reviewer {
     width: 100%;
-    height: 32px;
     margin-top: 8px;
     font-size: 16px;
-    box-sizing: border-box;
-  }
-
-  &__button {
-    width: 100%;
-    height: 32px;
-    font-size: 16px;
-    margin-top: 24px;
-    cursor: pointer;
+    overflow-wrap: break-word;
   }
 
   &__link {
-    margin: 24px auto 0 auto;
+    margin-top: 24px;
   }
 }

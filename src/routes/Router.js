@@ -5,20 +5,11 @@ import SignUp from '../pages/SignUp';
 import ReviewList from '../pages/ReviewList';
 import Profile from '../pages/Profile';
 import New from '../pages/New';
+import Detail from '../pages/Detail';
+import DetailEdit from '../pages/DetailEdit';
 
 function Router() {
   const [cookies, setToken] = useCookies(['authToken']);
-
-  console.log('Routers.js 前');
-  console.log(cookies);
-
-  if (cookies.authToken === 'undefined') {
-    console.log('強制トークン削除');
-    setToken('authToken', undefined);
-  }
-
-  console.log('Routers.js 後');
-  console.log(cookies);
 
   return (
     <BrowserRouter>
@@ -30,13 +21,14 @@ function Router() {
             <Route path="/signup" element={<Navigate to="/" />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/new" element={<New />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/edit/:id" element={<DetailEdit />} />
           </>
         ) : (
           <>
-            <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/profile" element={<Login />} />
-            <Route path="/new" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<Navigate to="/login" />} />
           </>
         )}
         {/* <Route path="/login" element={<Login />} />

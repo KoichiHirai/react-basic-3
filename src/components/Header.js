@@ -7,7 +7,7 @@ import axios from 'axios';
 function Header() {
   const [user, setUser] = useState(null);
   const [logoutFlag, setLogoutFlag] = useState(false);
-  const [cookies, removeCookie] = useCookies(['authToken']);
+  const [cookies, , removeCookie] = useCookies(['authToken']);
   const navigate = useNavigate();
 
   const handleLogout = () => {

@@ -9,6 +9,7 @@ function New() {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [detail, setDetail] = useState('');
+  const [review, setReview] = useState('');
   const [userName, setUserName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies(['authToken']);
@@ -16,16 +17,17 @@ function New() {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleUrlChange = (e) => setUrl(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleReviewChange = (e) => setReview(e.target.value);
   const handleCreate = async () => {
     const createData = {
       title: title,
       url: url,
       detail: detail,
-      review: userName,
+      review: review,
     };
 
     try {
-      const responseUserData = await axios.post(
+      await axios.post(
         'https://railway.bookreview.techtrain.dev/books',
         createData,
         {
@@ -78,9 +80,13 @@ function New() {
         </label>
         <input id="url" type="url" onChange={handleUrlChange} />
         <label className="create__label" htmlFor="detail">
-          レビュー内容
+          書籍内容
         </label>
         <textarea id="detail" onChange={handleDetailChange} />
+        <label className="create__label" htmlFor="review">
+          レビュー内容
+        </label>
+        <textarea id="review" onChange={handleReviewChange} />
         <button type="button" className="create__button" onClick={handleCreate}>
           登録
         </button>
